@@ -1,0 +1,75 @@
+<!-- Item Start -->
+    <div>
+        Shortly
+        Junior Developer
+        2w ago
+        Full Time
+        Worldwide
+        <!-- Role -->
+        Frontend
+        <!-- Level -->
+        Junior
+        <!-- Languages -->
+        HTML
+        JavaScript
+        <!-- Tools -->
+        Sass
+    </div>
+    <!-- Item End -->
+
+    <!-- Item Start -->
+    <div>
+        Insure
+        Junior Frontend Developer
+        2w ago
+        Full Time
+        USA only
+        <!-- Role -->
+        Frontend
+        <!-- Level -->
+        Junior
+        <!-- Languages -->
+        JavaScript
+        <!-- Tools -->
+        Vue
+        Sass
+    </div>
+    <!-- Item End -->
+
+    <!-- Item Start -->
+    <div>
+        Eyecam Co.
+        Full Stack Engineer
+        3w ago
+        Full Time
+        Worldwide
+        <!-- Role -->
+        Fullstack
+        <!-- Level -->
+        Midweight
+        <!-- Languages -->
+        JavaScript
+        Python
+        <!-- Tools -->
+        Django
+    </div>
+    <!-- Item End -->
+
+    <!-- Item Start -->
+    <div>
+        The Air Filter Company
+        Front-end Dev
+        1mo ago
+        Part Time
+        Worldwide
+        <!-- Role -->
+        Frontend
+        <!-- Level -->
+        Junior
+        <!-- Languages -->
+        JavaScript
+        <!-- Tools -->
+        React
+        Sass
+    </div>
+    <!-- Item End -->

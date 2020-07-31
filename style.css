@@ -1,5 +1,147 @@
+* {
+    font-family: 'Spartan', sans-serif;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+#top-margin {
+    height: 100px;
+    background-color: green;
+}
+
+#main {
+    background-color: hsl(180, 52%, 96%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#spacer {
+    height: 20px;
+}
+
 .card {
+    background-color: white;
+    max-width: 240px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 6px;
     height: 200px;
-    width: 300px;
-    border: 3px solid black;
+    width: 70%;
+}
+
+.company {
+    color: hsl(180, 29%, 50%);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card-featured {
+    border-left: 6px solid hsl(180, 29%, 50%);
+}
+
+.featured { /* tagged on a span */
+    text-transform: uppercase;
+    color: white;
+    font-size: 10px;
+}
+
+.featured-div { /* the div surrounding the span in the above class */
+    padding: 3px;
+    background-color: black;
+    border-radius: 11px;
+}
+
+.job-title {
+    font-weight: bold;
+}
+
+.line-one {
+    margin-top: 10px;
+    display: flex;
+}
+
+.line-one div {
+    margin-right: 10px;
+}
+
+.line-two {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.line-three {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #AAAAAA;
+    font-size: 12px;
+}
+
+.new {
+    text-transform: uppercase;
+    border-radius: 6px;
+    color: white;
+    font-size: 10px;
+}
+
+.new-div {
+    padding: 3px;
+    background-color: hsl(180, 29%, 50%);
+    border-radius: 11px;
+}
+
+.svg-container {
+    height: 0px;
+}
+
+.tag {
+    background-color: hsl(180, 52%, 96%);
+    margin-top: 5px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: min-content;
+}
+
+.tag span {
+    color: hsl(180, 29%, 50%);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 660px) {
+    .card {
+        max-width: 90%;
+        height: 150px;
+    }
+
+    .linebreak {
+        display: hidden;
+    }
+}
+
+
+/* StackOverflow Code */
+
+.manager-portrait {
+    width: 15%;
+    height: auto;
+    position: relative;
+    top: -38px;
+    left: 20px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-radius: 80%;
 }

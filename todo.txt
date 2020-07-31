@@ -1,0 +1,12 @@
+TODO:
+
+- resize things for dekstop!
+
+- reorganize the img to sit on the left 
+(maybe just unhide another img & hide the mobile sized img)
+
+- hide the line break when the browser is bigger than whatever sized
+
+- push the tags to their desktop location when desktop
+
+FIXME: cards are offcenter a bit

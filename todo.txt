@@ -1,5 +1,13 @@
 TODO:
 
-- make line 2 and line 3 push div width to fit full line 
+- use header image
+
+- look for visual bugs
+
+- make desktop have active states
+
+- allow user to add filters and only display the cards matching the filter (how do they pick tags to filter by?)
+
+- allow users to remove a tag from the filter
 
 FIXME: cards are offcenter a bit (on mobile??)

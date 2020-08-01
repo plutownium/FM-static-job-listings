@@ -7,9 +7,34 @@ body {
     margin: 0px;
 }
 
-#top-margin {
-    height: 100px;
-    background-color: green;
+#filter {
+    height: 50px;
+    /* min-width: 240px; */
+    width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+    bottom: 27px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#filter div {
+    margin: 10px;
+    background-color: hsl(180, 52%, 96%);
+    /* border-top-left-radius: 3px; */
+    /* border-bottom-left-radius: 3px; */
+    border-radius: 3px;
+}
+
+#filter-container {
+    width: 100%;
+    height: 30px;
+    background-color: hsl(180, 52%, 96%);
+    display: flex;
+    justify-content: center;
 }
 
 #main {
@@ -20,6 +45,12 @@ body {
     align-items: center;
 }
 
+#top-margin {
+    height: 100px;
+    background-color: hsl(180, 29%, 50%);
+    background-image: url("./images/bg-header-mobile.svg");
+}
+
 #spacer {
     height: 20px;
 }
@@ -27,14 +58,14 @@ body {
 .card {
     background-color: white;
     max-width: 240px;
+    height: 200px;
+    width: 70%;
     margin-top: 20px;
     margin-bottom: 5px;
     margin-left: 20px;
     margin-right: 20px;
     padding: 20px;
     border-radius: 6px;
-    height: 200px;
-    width: 70%;
 }
 
 .company {
@@ -61,6 +92,11 @@ body {
     padding: 3px;
     background-color: black;
     border-radius: 11px;
+}
+
+.filter-tag {
+    padding: 5px;
+    font-size: 12px;
 }
 
 .job-title {
@@ -122,7 +158,16 @@ body {
     margin-right: 15px;
     margin-bottom: 10px;
     padding: 5px;
+    border-radius: 5px;
     width: min-content;
+}
+
+.tag:active {
+    background-color: hsl(180, 29%, 50%);
+}
+
+.tag span:active {
+    color: white;
 }
 
 .tag span {
@@ -136,12 +181,27 @@ body {
     flex-wrap: wrap;
 }
 
+.x {
+    padding: 5px;
+}
+
+.x:active {
+    background-color: black;
+    color: white;
+}
+
 @media screen and (min-width: 850px) {
+    #top-margin {
+        height: 100px;
+        /* background-color: green; */
+        background-image: url("./images/bg-header-desktop.svg");
+    }
+
     .card {
         max-width: 90%;
         height: 120px;
         display: flex;
-        border: 5px solid black;
+        /* border: 5px solid black; */
     }
 
     .desktop-container {
@@ -154,11 +214,11 @@ body {
         display: flex;
         justify-content: center;
         align-items: center; 
-        border: 3px solid blue;
+        /* border: 3px solid blue; */
     }
 
     .desktop-img div {
-        border: 3px solid yellow;
+        /* border: 3px solid yellow; */
     }
     
     .linebreak {
@@ -166,8 +226,10 @@ body {
     }
 
     .lines {
+        margin-top: 10px;
+        margin-left: 20px;
         height: fit-content;
-        border: 3px solid red;
+        /* border: 3px solid red; */
     }
 
     .svg-container {
@@ -176,7 +238,7 @@ body {
 
     .tag {
         height: min-content;
-        border: 2px solid pink;
+        /* border: 2px solid pink; */
     }
 
     .tags {
@@ -187,8 +249,7 @@ body {
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
-        /* align-content: flex-start; */
-        border: 2px solid cyan;
+        /* border: 2px solid cyan; */
     }
 }
 

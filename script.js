@@ -46,15 +46,19 @@ function rerenderDOM() {
             const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes)
             xBtn.addEventListener("click", function () {
                 removeAssociatedTagFromFilter(tag)
+                // rerenderDOM()
             })
         }
+
+        // FIXME: need to do something like, "on DOM rerender, go thru all filterTags, select all X btns, 
+        // add cancel EventListener to each"
 
         // hide the cards that don't match
         for (const card of cards) {
             const getsFilteredOut = cardGetsFilteredOut(card) // returns true if none of the card's tags are in the filter list
             // if the card gets filtered, add the hidden class
             if (getsFilteredOut) {
-                console.log("HI", card.childNodes[1].childNodes[1])
+                // console.log("HI", card.childNodes[1].childNodes[1])
                 card.classList.add("card-hider")
             } else {
                 // if the card *doesn't* get filtered, check if it's already hidden & remove the hider if it is hidden
@@ -122,7 +126,37 @@ function retrieveAssociatedXBtnFromFilterSection(tagType, nodes) {
 }
 
 function removeAssociatedTagFromFilter(tagType) {
+    console.log("HEY")
+    const currentTags = Array.prototype.slice.call(filterSection.getElementsByClassName("filter-tag"))
+    filterSection.innerHTML = ""  // filterSection html is blank at this point
 
+    // console.log(filterSection.innerHTML)
+    // console.log(filterSection, currentTags.length, currentTags)
+    for (const tag of currentTags) {
+        // console.log(typeof tag, tag)
+        if (tag.childNodes) {
+            // if (tag.childNodes[1].innerHTML === tagType) {
+            //     // remove the matching tag from the filter section
+            //     console.log("match", tag.childNodes[1].innerHTML)
+            //     console.log("removing tag:", tag)
+            //     tag.parentNode.removeChild(tag)
+            //     // FIXME: when I have JS and CSS tagged, I click CSS, and both CSS & JS r removed.
+            // }
+            if (tag.childNodes[1].innerHTML !== tagType) {
+                const elementHTML = tag.outerHTML;
+                console.log("writing:", elementHTML)
+                filterSection.innerHTML += elementHTML
+                // console.log("appending", tag)
+                // filterSection.appendChild(tag)
+            }
+        }
+        // tag.parentNode.removeChild(tag)
+    }
+    // filterTags.splice(filterTags.indexOf(tagType))
+    const unwantedTagIndex = filterTags.indexOf(tagType)
+    if (unwantedTagIndex > -1) {
+        filterTags.splice(unwantedTagIndex, 1)
+    }
 }
 
 // TODO: Style the filter tags - IS THIS DONE? YES/no?

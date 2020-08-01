@@ -39,12 +39,28 @@ function rerenderDOM() {
 
     // if there are tags in the filter, display matching tags.
     if (filterTags.length > 0) {
+        // make the tags appear in the Filter section
+        filterSection.innerHTML = ""
+        for (const tag of filterTags) {
+            filterSection.innerHTML += makeFilterTag(tag)
+            const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes)
+            xBtn.addEventListener("click", function () {
+                removeAssociatedTagFromFilter(tag)
+            })
+        }
+
+        // hide the cards that don't match
         for (const card of cards) {
-            const getsFilteredOut = cardGetsFilteredOut(card)
+            const getsFilteredOut = cardGetsFilteredOut(card) // returns true if none of the card's tags are in the filter list
             // if the card gets filtered, add the hidden class
             if (getsFilteredOut) {
-                console.log("HI", card)
+                console.log("HI", card.childNodes[1].childNodes[1])
                 card.classList.add("card-hider")
+            } else {
+                // if the card *doesn't* get filtered, check if it's already hidden & remove the hider if it is hidden
+                if (card.classList.contains("card-hider")) {
+                    card.classList.remove("card-hider")
+                }
             }
         }
     }
@@ -55,17 +71,23 @@ function cardGetsFilteredOut(card) {
         return false // no cards are filtered out if there is no filterTags!
     }
     // assemble array of tags in the card
-    const cardTags = card.getElementsByClassName("tag");
+    const cardTagElements = card.getElementsByClassName("tag");
+    const cardTags = [];
+    for (const element of cardTagElements) {
+        cardTags.push(element.childNodes[1].innerHTML)
+    }
+
+    const numOfMatchesRequiredToStay = filterTags.length;
+    let totalMatches = 0;
 
     // a card gets filtered out if it has no tags in the filterTags
     for (let i = 0; i < cardTags.length; i++) {
-        const currentTag = cardTags[i].childNodes[1].innerHTML
-        console.log(currentTag)
-        for (let j = 0; j < filterTags.length; j++) {
-            if (currentTag === filterTags[j]) {
-                throw "Success"
-
-                return false // card is not filtered out because one of its tags matches the filter tags
+        const currentTag = cardTags[i]
+        if (filterTags.includes(currentTag)) {
+            // console.log("card isnt filtered because:", filterTags, currentTag)
+            totalMatches++;
+            if (totalMatches == numOfMatchesRequiredToStay) {
+                return false
             }
         }
     }
@@ -97,6 +119,10 @@ function retrieveAssociatedXBtnFromFilterSection(tagType, nodes) {
             }
         }
     }
+}
+
+function removeAssociatedTagFromFilter(tagType) {
+
 }
 
 // TODO: Style the filter tags - IS THIS DONE? YES/no?

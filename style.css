@@ -75,7 +75,7 @@ body {
 }
 
 .card-hider {
-    display: none;
+    display: none !important;
 }
 
 .company {

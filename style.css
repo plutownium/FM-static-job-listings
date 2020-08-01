@@ -19,10 +19,12 @@ body {
     display: flex;
     justify-content: left;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #filter div {
-    margin: 10px;
+    margin: 5px;
     background-color: hsl(180, 52%, 96%);
     /* border-top-left-radius: 3px; */
     /* border-bottom-left-radius: 3px; */

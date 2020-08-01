@@ -1,7 +1,5 @@
 TODO:
 
-- use header image
-
 - look for visual bugs
 
 - make desktop have active states
@@ -11,3 +9,5 @@ TODO:
 - allow users to remove a tag from the filter
 
 FIXME: cards are offcenter a bit (on mobile??)
+
+FIXME: fix up the "X" button for filter tags

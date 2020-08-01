@@ -70,15 +70,20 @@ body {
     border-radius: 6px;
 }
 
+.card-featured {
+    border-left: 6px solid hsl(180, 29%, 50%);
+}
+
+.card-hider {
+    display: none;
+}
+
 .company {
     color: hsl(180, 29%, 50%);
     font-size: 14px;
     font-weight: bold;
 }
 
-.card-featured {
-    border-left: 6px solid hsl(180, 29%, 50%);
-}
 
 .desktop-img {
     display: none;

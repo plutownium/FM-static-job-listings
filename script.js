@@ -1,64 +1,87 @@
-const tagEls = document.getElementsByClassName("tag")
+const cardTagEls = document.getElementsByClassName("tag")
 const filterSection = document.getElementById("filter")
 
-const activeTags = [];
+let filterTags = [];
 
-// TODO: rewrite so "activeTags" is the single src of truth for the app.
-// TODO: when a tag is added, add it to activeTags & RERENDER based on contents of ActiveTags.
-// TODO: if activeTags.length === 0, render all cards.
-// TODO: if activetags.length > 0, render based on content of activeTags.
+// TODO: rewrite so "filterTags" is the single src of truth for the app.
+// TODO: when a tag is added, add it to filterTags & RERENDER based on contents of filterTags.
+// TODO: if filterTags.length === 0, render all cards.
+// TODO: if filterTags.length > 0, render based on content of filterTags.
 
-for (let i = 0; i < tagEls.length; i++) {
-    tagEls[i].addEventListener("click", function () {
+for (let i = 0; i < cardTagEls.length; i++) {
+    cardTagEls[i].addEventListener("click", function () {
         // add tag choice to filter selection
-        const tagType = tagEls[i].childNodes[1].innerHTML
-        if (tagIsAlreadyPresent(tagType)) {
+        const tagType = cardTagEls[i].childNodes[1].innerHTML
+        if (filterTags.includes(tagType)) {
             // pass
             console.log("Skipping, tag already present...")
         } else {
-            // if tag isn't there yet, load it up!
-            filterSection.innerHTML += makeFilterTag(tagType)
-            // grab the associated "x" and add a "removeTag" event listener
-            const associatedXBtn = retrieveAssociatedXBtnFromFilterSection(tagType, filterSection.childNodes)
-            associatedXBtn.addEventListener("click", function () {
-                // prepare to remove the tag if the x is clicked
-                console.log("CLICKED!")
-                removeTagFromFilter(tagType)
-            })
+            filterTags.push(tagType)
+            console.log(filterTags)
+            rerenderDOM()
         }
     })
 }
 
+function rerenderDOM() {
+    // display only cards & filterTags that match the filter
+    const cards = document.getElementsByClassName("card")
+
+    // if there are no tags in the filter, display all cards
+    if (filterTags.length === 0) {
+        for (const card of cards) {
+            // if the card has the "hidden" class, remove it
+            if (card.classList.contains("card-hider")) {
+                card.classList.remove("card-hider")
+            }
+        }
+    }
+
+    // if there are tags in the filter, display matching tags.
+    if (filterTags.length > 0) {
+        for (const card of cards) {
+            const getsFilteredOut = cardGetsFilteredOut(card)
+            // if the card gets filtered, add the hidden class
+            if (getsFilteredOut) {
+                console.log("HI", card)
+                card.classList.add("card-hider")
+            }
+        }
+    }
+}
+
+function cardGetsFilteredOut(card) {
+    if (filterTags.length === 0) {
+        return false // no cards are filtered out if there is no filterTags!
+    }
+    // assemble array of tags in the card
+    const cardTags = card.getElementsByClassName("tag");
+
+    // a card gets filtered out if it has no tags in the filterTags
+    for (let i = 0; i < cardTags.length; i++) {
+        const currentTag = cardTags[i].childNodes[1].innerHTML
+        console.log(currentTag)
+        for (let j = 0; j < filterTags.length; j++) {
+            if (currentTag === filterTags[j]) {
+                throw "Success"
+
+                return false // card is not filtered out because one of its tags matches the filter tags
+            }
+        }
+    }
+    return true // none of the tags matched, therefore the card is filtered out
+}
+
 function makeFilterTag(type) {
+    // update the state
+    // filterTags.push(type)
+
     const tagHTML = `
         <div class="${type} filter-tag">
             <span>${type}</span><span class="x">X</span>
         </div>
     `
     return tagHTML
-}
-
-function tagIsAlreadyPresent(type) {
-    // scans all the filter tags currently present, returns true if the input tag alraedy exists.
-    if (typeof type !== "string") {
-        // basic error handling
-        console.log("ERROR INPUT:", type)
-        throw "Wrong input type"
-    }
-    const currentTags = [];
-    const tagEls = filterSection.childNodes
-    for (const tag of tagEls) {
-        if (tag.tagName == "DIV") {
-            const tagType = tag.childNodes[1].innerHTML
-            // console.log("was a div named", tagType)
-            currentTags.push(tagType)
-        }
-    }
-    if (currentTags.includes(type)) {
-        return true
-    } else {
-        return false
-    }
 }
 
 function retrieveAssociatedXBtnFromFilterSection(tagType, nodes) {
@@ -74,22 +97,6 @@ function retrieveAssociatedXBtnFromFilterSection(tagType, nodes) {
             }
         }
     }
-}
-
-function removeTagFromFilter(tagType) {
-    const filterDivChildren = document.getElementById("filter").children
-    for (const tag of filterDivChildren) {
-        console.log(tag)
-        if (tag.childNodes) {
-            if (tag.childNodes[1].innerHTML === tagType) {
-                // delete the element from the filter
-                tag.parentNode.removeChild(tag)
-                return true
-            }
-        }
-    }
-    console.log(tagType)
-    throw "Failed to remove tag from filter"
 }
 
 // TODO: Style the filter tags - IS THIS DONE? YES/no?

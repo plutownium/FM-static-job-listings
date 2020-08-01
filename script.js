@@ -29,6 +29,7 @@ function rerenderDOM() {
 
     // if there are no tags in the filter, display all cards
     if (filterTags.length === 0) {
+        filterSection.innerHTML = ""
         for (const card of cards) {
             // if the card has the "hidden" class, remove it
             if (card.classList.contains("card-hider")) {
@@ -43,15 +44,27 @@ function rerenderDOM() {
         filterSection.innerHTML = ""
         for (const tag of filterTags) {
             filterSection.innerHTML += makeFilterTag(tag)
-            const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes)
+            // const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes)
+            // xBtn.addEventListener("click", function () {
+            //     const unwantedTagIndex = filterTags.indexOf(tag)
+            //     if (unwantedTagIndex > -1) {
+            //         filterTags.splice(unwantedTagIndex, 1)
+            //     }
+            //     console.log(filterTags)  // FIXME: sometimes the final tag is removed from filter but the tag element stays
+            //     rerenderDOM()
+            // })
+        }
+        // now go thru each tag, pull out its associated X, and add an event listener allowing removal of the tag
+        for (const tag of filterTags) {
+            const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes);
             xBtn.addEventListener("click", function () {
-                removeAssociatedTagFromFilter(tag)
-                // rerenderDOM()
+                const unwantedTagIndex = filterTags.indexOf(tag)
+                if (unwantedTagIndex > -1) {
+                    filterTags.splice(unwantedTagIndex, 1)
+                }
+                rerenderDOM()
             })
         }
-
-        // FIXME: need to do something like, "on DOM rerender, go thru all filterTags, select all X btns, 
-        // add cancel EventListener to each"
 
         // hide the cards that don't match
         for (const card of cards) {
@@ -125,41 +138,4 @@ function retrieveAssociatedXBtnFromFilterSection(tagType, nodes) {
     }
 }
 
-function removeAssociatedTagFromFilter(tagType) {
-    console.log("HEY")
-    const currentTags = Array.prototype.slice.call(filterSection.getElementsByClassName("filter-tag"))
-    filterSection.innerHTML = ""  // filterSection html is blank at this point
-
-    // console.log(filterSection.innerHTML)
-    // console.log(filterSection, currentTags.length, currentTags)
-    for (const tag of currentTags) {
-        // console.log(typeof tag, tag)
-        if (tag.childNodes) {
-            // if (tag.childNodes[1].innerHTML === tagType) {
-            //     // remove the matching tag from the filter section
-            //     console.log("match", tag.childNodes[1].innerHTML)
-            //     console.log("removing tag:", tag)
-            //     tag.parentNode.removeChild(tag)
-            //     // FIXME: when I have JS and CSS tagged, I click CSS, and both CSS & JS r removed.
-            // }
-            if (tag.childNodes[1].innerHTML !== tagType) {
-                const elementHTML = tag.outerHTML;
-                console.log("writing:", elementHTML)
-                filterSection.innerHTML += elementHTML
-                // console.log("appending", tag)
-                // filterSection.appendChild(tag)
-            }
-        }
-        // tag.parentNode.removeChild(tag)
-    }
-    // filterTags.splice(filterTags.indexOf(tagType))
-    const unwantedTagIndex = filterTags.indexOf(tagType)
-    if (unwantedTagIndex > -1) {
-        filterTags.splice(unwantedTagIndex, 1)
-    }
-}
-
 // TODO: Style the filter tags - IS THIS DONE? YES/no?
-// TODO: Add a X box beside each filter tag
-// TODO: as each X box is created, add an event listener allowing the X to remove its tag from the fitler list.
-// TODO: make only cards matching filters show up.

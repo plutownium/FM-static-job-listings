@@ -69,6 +69,7 @@ body {
 
 .line-one {
     margin-top: 10px;
+
     display: flex;
 }
 
@@ -79,6 +80,11 @@ body {
 .line-two {
     margin-top: 10px;
     margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.line-two span {
+    display: inline-block;
 }
 
 .line-three {
@@ -86,6 +92,11 @@ body {
     margin-bottom: 15px;
     color: #AAAAAA;
     font-size: 12px;
+    white-space: nowrap;
+}
+
+.line-three span {
+    display: inline-block;
 }
 
 .new {
@@ -130,6 +141,7 @@ body {
         max-width: 90%;
         height: 120px;
         display: flex;
+        border: 5px solid black;
     }
 
     .desktop-container {

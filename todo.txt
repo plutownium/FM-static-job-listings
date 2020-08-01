@@ -1,5 +1,5 @@
 TODO:
 
-- copy formatting from first 2 cards to the rest of the cards
+- make line 2 and line 3 push div width to fit full line 
 
 FIXME: cards are offcenter a bit (on mobile??)

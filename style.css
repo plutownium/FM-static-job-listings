@@ -7,20 +7,36 @@ body {
     margin: 0px;
 }
 
+#clear-btn {
+    margin: 5px;
+    padding: 5px;
+    background-color: white !important;
+    color: hsl(180, 52%, 96%);
+}
+
+#clear-text {
+    background-color: white;
+    color: hsl(180, 8%, 52%);
+}
+
+#clear-text:active {
+    text-decoration: underline;
+}
+
 #filter {
     height: 50px;
     /* min-width: 240px; */
-    width: 80%;
+    width: 70%;
     background-color: white;
     border-radius: 5px;
     position: relative;
     bottom: 27px;
-    border: 2px solid black;
     display: flex;
     justify-content: left;
     align-items: center;
     padding-left: 15px;
     padding-right: 15px;
+    border: 3px solid red;
 }
 
 #filter div {
@@ -83,7 +99,6 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
-
 
 .desktop-img {
     display: none;
@@ -198,6 +213,10 @@ body {
 }
 
 @media screen and (min-width: 850px) {
+    #filter {
+        max-width: 90%;
+    }
+    
     #top-margin {
         height: 100px;
         /* background-color: green; */

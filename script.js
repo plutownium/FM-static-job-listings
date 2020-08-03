@@ -3,10 +3,7 @@ const filterSection = document.getElementById("filter")
 
 let filterTags = [];
 
-// TODO: rewrite so "filterTags" is the single src of truth for the app.
-// TODO: when a tag is added, add it to filterTags & RERENDER based on contents of filterTags.
-// TODO: if filterTags.length === 0, render all cards.
-// TODO: if filterTags.length > 0, render based on content of filterTags.
+// TODO: style clear btn
 
 for (let i = 0; i < cardTagEls.length; i++) {
     cardTagEls[i].addEventListener("click", function () {
@@ -27,9 +24,14 @@ function rerenderDOM() {
     // display only cards & filterTags that match the filter
     const cards = document.getElementsByClassName("card")
 
-    // if there are no tags in the filter, display all cards
+    // if there are no tags in the filter, hide the filter div and display all cards
     if (filterTags.length === 0) {
         filterSection.innerHTML = ""
+        // console.log(document.getElementById("filter-container"))
+        if (!document.getElementById("filter-container").classList.contains("card-hider")) { // "if the filter container doesn't contain the hider class..."
+            document.getElementById("filter-container").classList.add("card-hider")
+        }
+
         for (const card of cards) {
             // if the card has the "hidden" class, remove it
             if (card.classList.contains("card-hider")) {
@@ -38,21 +40,17 @@ function rerenderDOM() {
         }
     }
 
-    // if there are tags in the filter, display matching tags.
+    // if there are tags in the filter, display the filter div and display matching tags.
     if (filterTags.length > 0) {
         // make the tags appear in the Filter section
         filterSection.innerHTML = ""
+        console.log(document.getElementById("filter-container"))
+        if (document.getElementById("filter-container").classList.contains("card-hider")) {
+            document.getElementById("filter-container").classList.remove("card-hider")
+        }
         for (const tag of filterTags) {
             filterSection.innerHTML += makeFilterTag(tag)
-            // const xBtn = retrieveAssociatedXBtnFromFilterSection(tag, filterSection.childNodes)
-            // xBtn.addEventListener("click", function () {
-            //     const unwantedTagIndex = filterTags.indexOf(tag)
-            //     if (unwantedTagIndex > -1) {
-            //         filterTags.splice(unwantedTagIndex, 1)
-            //     }
-            //     console.log(filterTags)  // FIXME: sometimes the final tag is removed from filter but the tag element stays
-            //     rerenderDOM()
-            // })
+
         }
         // now go thru each tag, pull out its associated X, and add an event listener allowing removal of the tag
         for (const tag of filterTags) {
@@ -80,6 +78,19 @@ function rerenderDOM() {
                 }
             }
         }
+
+        // finally, add a "Clear" btn to the filter
+        filterSection.innerHTML += `
+            <div id="clear-btn">
+                <span id="clear-text">Clear</span>
+            </div>
+        `
+        document.getElementById("clear-btn").addEventListener("click", function () {
+            // reset filter on click
+            filterTags = [];
+            rerenderDOM();
+        })
+
     }
 }
 
